@@ -1,7 +1,7 @@
 # WindowsIOTLEDMatrix
 This Library allows you to use LED Matrix with your Raspberry Pi 3 on Windows IOT Core.
 
-#Currently in Dev
+# Currently in Dev
 
 I have remapped the pinout to refect the adapter used by https://github.com/hzeller/rpi-rgb-led-matrix
 The numbers below are not the header pins on the rpi, but the gpio numbers
@@ -21,7 +21,7 @@ GPIO 8		-->  R2 (LED 2: Red)<br/>
 GPIO 10		-->  B2 (LED 2: Blue)<br/>
 GPIO 9		-->  G2 (LED 2: Green)<br/>
 
-This is the DEV, and is untested.  As of now the Master is untouched from forking from faicalsaid: https://github.com/faicalsaid/WindowsIOTLEDMatrix
+This is the DEV, and is untested.  As of now there is no Master branch! This was forked from faicalsaid: https://github.com/faicalsaid/WindowsIOTLEDMatrix
 
 The library is still not very fast and does some flickering. Any help will be apreciated.
 This library was based on the work of https://github.com/mattdh666/rpi-led-matrix-panel
