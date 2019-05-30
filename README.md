@@ -1,5 +1,7 @@
 # WindowsIOTLEDMatrix
-This Library allows you to use LED Matrix with your Raspberry Pi 3 on Windows IOT Core. It is working with LED matrices 32x16 that can be chained. Currently tested to a chain of 4 matrices of 32x32 => 128x32
+This Library allows you to use LED Matrix with your Raspberry Pi 3 on Windows IOT Core.
+
+#Currently in Dev
 
 I have remapped the pinout to refect the adapter used by https://github.com/hzeller/rpi-rgb-led-matrix
 The numbers below are not the header pins on the rpi, but the gpio numbers
