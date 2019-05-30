@@ -11,20 +11,21 @@ namespace LedMatrixEngineSharp
     public class GpioProxy
     {
         public GpioController gpio { get; set; }
+        //https://docs.microsoft.com/en-us/windows/iot-core/learn-about-hardware/pinmappings/pinmappingsrpi
         #region "Pin Numbers"
-        const int OE_PIN = 5;
-        const int CLOCK_PIN = 6;
-        const int LATCH_PIN = 4;
-        const int ROWADDRA_PIN = 12;
-        const int ROWADDRB_PIN = 13;
-        const int ROWADDRC_PIN = 16;
-        const int ROWADDRD_PIN = 19;
-        const int R1_PIN = 17;
-        const int G1_PIN = 22;
-        const int B1_PIN = 18;
-        const int R2_PIN = 23;
-        const int G2_PIN = 25;
-        const int B2_PIN = 24;
+        const int OE_PIN = 18; //12;
+        const int CLOCK_PIN = 17; //11;
+        const int LATCH_PIN = 4; //7;
+        const int ROWADDRA_PIN = 22;//15;
+        const int ROWADDRB_PIN = 23;//16;
+        const int ROWADDRC_PIN = 24;//18;
+        const int ROWADDRD_PIN = 25;//22;
+        const int R1_PIN = 11;//23;
+        const int G1_PIN = 27;//13;
+        const int B1_PIN = 7;//26;
+        const int R2_PIN = 8;//24;
+        const int G2_PIN = 9;//21;
+        const int B2_PIN = 10;//19;
         #endregion
 
         public GpioPin outputEnabled;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedMatrixEngineSharp", "LedMatrixEngineSharp\LedMatrixEngineSharp.csproj", "{7FCCEECD-0EE3-4949-98DB-512AC8F9D7C0}"
 EndProject
@@ -36,6 +36,8 @@ Global
 		{7FCCEECD-0EE3-4949-98DB-512AC8F9D7C0}.Release|x86.ActiveCfg = Release|x86
 		{7FCCEECD-0EE3-4949-98DB-512AC8F9D7C0}.Release|x86.Build.0 = Release|x86
 		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|Any CPU.Build.0 = Debug|x86
+		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|ARM.ActiveCfg = Debug|ARM
 		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|ARM.Build.0 = Debug|ARM
 		{81724744-3695-4A85-992C-8DA0ECBA19C3}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -58,5 +60,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92F50E3D-E055-44D1-932E-F7AAE9C64CFC}
 	EndGlobalSection
 EndGlobal

@@ -38,8 +38,8 @@ namespace LedMatrixEngineSharp
         byte[] Font4x6;
         byte[] Font3x5;
 
-        int Width = 128;
-        int Height = 32;
+        int Width = 96; //MB changing this to see if I can set the Height? was 128 now 96
+        int Height = 16; //MB changing this to see if I can set the Height? was 32 now 16
         public RgbMatrix()
         {
             #region "Fonts"

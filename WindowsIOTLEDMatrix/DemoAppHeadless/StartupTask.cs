@@ -21,7 +21,9 @@ namespace DemoAppHeadless
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             //initialize the led matrix
+           
             matrix = new RgbMatrix();
+            
             //Don't need await
             Windows.System.Threading.ThreadPool.RunAsync(matrix.updateDisplay, Windows.System.Threading.WorkItemPriority.High);
             //draw on the led matrix
@@ -30,6 +32,7 @@ namespace DemoAppHeadless
 
         private void drawSomething()
         {
+            
             //clear the matrix
             matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
             CanvasTextFormat ff = new CanvasTextFormat();
@@ -37,12 +40,16 @@ namespace DemoAppHeadless
             ff.FontFamily = "Courier New";
             ff.HorizontalAlignment = CanvasHorizontalAlignment.Center;
             //write hello world
-            matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255,255,0,0), ff);
-            //draw a circle
-            matrix.Session.DrawCircle(54, 16, 10, Color.FromArgb(255, 0, 255, 0), 1);
+            while (true)
+            {
+                // matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255, 255, 0, 0), ff);
 
+                //draw a circle
+                //matrix.Session.DrawCircle(54, 16, 10, Color.FromArgb(255, 0, 255, 0), 1);
+                matrix.Session.FillRectangle(0, 0, 16, 32, Color.FromArgb(255, 255, 255, 255));
+            }
             //flush the win2d to the led matrix for the specified rectangle 
-            matrix.Flush(0, 0, 128, 32);
+            //matrix.Flush(0, 0, 128, 32);
         }
     }
 }
