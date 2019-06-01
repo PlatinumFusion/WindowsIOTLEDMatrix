@@ -22,12 +22,12 @@ namespace LedMatrixEngineSharp
         public int _fontHeight { get; set; }
         public int _fontSize { get; set; }
         public int _fontWidth { get; set; }
-        public int _textCursorX { get; set; }
+        public int _textCursorX { get;set; }
         public int _textCursorY { get; set; }
         public bool _wordWrap { get; set; }
         public int RowsPerSubPanel { get; set; }
         private LedDisplay display;
-        private int pwmbits = 1;
+        private int pwmbits = 1; //1
         public int RowClockTime { get; set; }
         private CanvasDevice device;
         private CanvasRenderTarget target;
@@ -38,7 +38,7 @@ namespace LedMatrixEngineSharp
         byte[] Font4x6;
         byte[] Font3x5;
 
-        int Width = 96; //MB changing this to see if I can set the Height? was 128 now 96
+        int Width = 64; //MB changing this to see if I can set the Height? was 128 now 64
         int Height = 16; //MB changing this to see if I can set the Height? was 32 now 16
         public RgbMatrix()
         {
@@ -346,7 +346,7 @@ namespace LedMatrixEngineSharp
             proxy.setupOutputBits();
 
              device = new CanvasDevice();
-             target = new CanvasRenderTarget(device, Width, Height, 96);
+             target = new CanvasRenderTarget(device, Width, Height, 64); //64
              Session = target.CreateDrawingSession();
 
             _fontColor = white;
@@ -354,8 +354,8 @@ namespace LedMatrixEngineSharp
             _fontWidth = 3;
             _fontHeight = 5;
             _wordWrap = true;
-            RowsPerSubPanel = 16;
-            RowClockTime = 100;
+            RowsPerSubPanel = 16; //16
+            RowClockTime = 100; //100
             RowSleepNanos = new long[]  {   // Only using the first PwmBits elements.
                 (1 * RowClockTime) - RowClockTime,
                         (2 * RowClockTime) - RowClockTime,
@@ -411,10 +411,13 @@ namespace LedMatrixEngineSharp
             //    }
             //}
         }
-
+        private void Translater(int x, int y)
+        {
+            
+        }
         public void drawPixel(int x, int y, Color c)
         {
-            if (y > 31)
+            if (y > 31)//(y> 15)//(y > 31)
             {
                 x = 127 - x;
                 y = 63 - y;
@@ -431,7 +434,7 @@ namespace LedMatrixEngineSharp
             for (int b = 0; b < pwmbits; b++)
             {
                 int mask = 1 << b;
-                if (y < 16)
+                if (y < 16) //16
                 {
                     // Upper sub-panel
                     display.planes[b].colormatrix[y].color1[x].A = c.A;
@@ -443,7 +446,7 @@ namespace LedMatrixEngineSharp
                 else
                 {
                     // Lower sub-panel
-                    display.planes[b].colormatrix[y - 16].color2[x].A = c.A;
+                    display.planes[b].colormatrix[y - 16].color2[x].A = c.A; //16
                     display.planes[b].colormatrix[y - 16].color2[x].R = (byte)((red & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 16].color2[x].G = (byte)((green & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 16].color2[x].B = (byte)((blue & mask) == mask ? 255 : 0);
@@ -470,7 +473,7 @@ namespace LedMatrixEngineSharp
                 GpioPinValue lastb2 = GpioPinValue.Low;
                 for (int a = 0; a < 2; a++)
                 {
-                    for (int row = a; row < RowsPerSubPanel; row += 2)
+                    for (int row = a; row < RowsPerSubPanel; row += 2) //row += 2)
                     {
                         for (int pwmi = 0; pwmi < pwmbits; pwmi++)
                         {
@@ -509,7 +512,7 @@ namespace LedMatrixEngineSharp
                                 GpioPinValue _r1 = myrow.color1[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High;
                                 GpioPinValue _g1 = myrow.color1[col].G == 0 ? GpioPinValue.Low : GpioPinValue.High;
                                 GpioPinValue _b1 = myrow.color1[col].B == 0 ? GpioPinValue.Low : GpioPinValue.High;
-                                GpioPinValue _r2 = myrow.color2[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High;
+                                GpioPinValue _r2 = myrow.color2[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High; //Sholdn't need this for troubleshooting
                                 GpioPinValue _g2 = myrow.color2[col].G == 0 ? GpioPinValue.Low : GpioPinValue.High;
                                 GpioPinValue _b2 = myrow.color2[col].B == 0 ? GpioPinValue.Low : GpioPinValue.High;
 
@@ -523,11 +526,11 @@ namespace LedMatrixEngineSharp
                                     proxy.g1.Write(_g1);
                                     lastg1 = _g1;
                                 }
-                                //if (lastb1 != _b1)
-                                //{
-                                //    b1.Write(_b1);
-                                //    lastb1 = _b1;
-                                //}
+                                if (lastb1 != _b1) //This was commented
+                                {
+                                    proxy.b1.Write(_b1);
+                                    lastb1 = _b1;
+                                } //To here
                                 if (lastr2 != _r2)
                                 {
                                     proxy.r2.Write(_r2);
@@ -538,11 +541,11 @@ namespace LedMatrixEngineSharp
                                     proxy.g2.Write(_g2);
                                     lastg2 = _g2;
                                 }
-                                //if (lastb2 != _b2)
-                                //{
-                                //    b2.Write(_b2);
-                                //    lastb2 = _b2;
-                                //}
+                                if (lastb2 != _b2) //This was commented
+                                {
+                                    proxy.b2.Write(_b2);
+                                    lastb2 = _b2;
+                                }
 
 
                                 //_gpio->setBits(clock, 2); //nomask

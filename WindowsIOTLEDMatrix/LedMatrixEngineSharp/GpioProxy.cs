@@ -126,10 +126,10 @@ namespace LedMatrixEngineSharp
 
         public void setRowAddress(int row)
         {
-            rowAddressA.Write((row & 1) == 1 ? GpioPinValue.High : GpioPinValue.Low);
-            rowAddressB.Write((row & 2) == 2 ? GpioPinValue.High : GpioPinValue.Low);
-            rowAddressC.Write((row & 4) == 4 ? GpioPinValue.High : GpioPinValue.Low);
-            rowAddressD.Write((row & 8) == 8 ? GpioPinValue.High : GpioPinValue.Low);
+            rowAddressA.Write((row & 1) == 1 ? GpioPinValue.High : GpioPinValue.Low); //1
+            rowAddressB.Write((row & 2) == 2 ? GpioPinValue.High : GpioPinValue.Low); //2 /4
+            rowAddressC.Write((row & 4) == 4 ? GpioPinValue.High : GpioPinValue.Low);// 4 /8
+            rowAddressD.Write((row & 8) == 8 ? GpioPinValue.High : GpioPinValue.Low);//8 /16
 
         }
     }

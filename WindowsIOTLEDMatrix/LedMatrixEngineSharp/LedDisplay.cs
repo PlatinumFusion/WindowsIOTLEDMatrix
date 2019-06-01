@@ -18,7 +18,7 @@ namespace LedMatrixEngineSharp
             for (int j = 0; j < pwmbits; j++)
             {
                 planes[j] = new Plane();
-                for (int i = 0; i < 16; i++)
+                for (int i = 0; i < 16; i++) //16
                 {
                     planes[j].colormatrix[i] = new DisplayRow(i, width);
                 }
@@ -44,7 +44,7 @@ namespace LedMatrixEngineSharp
         public DisplayRow[] colormatrix { get; set; }
         public Plane()
         {
-            colormatrix = new DisplayRow[16];
+            colormatrix = new DisplayRow[16]; //16
         }
     }
     public class RowAddress
@@ -56,10 +56,10 @@ namespace LedMatrixEngineSharp
 
         public RowAddress(int address)
         {
-            A = (address & 1) == 1;
-            B = (address & 2) == 2;
-            C = (address & 4) == 4;
-            D = (address & 8) == 8;
+            A = (address & 1) == 1; //1
+            B = (address & 2) == 2; //2
+            C = (address & 4) == 4; //4
+            D = (address & 8) == 8; //8
 
         }
     }
