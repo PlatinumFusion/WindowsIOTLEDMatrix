@@ -26,6 +26,12 @@ namespace LedMatrixEngineSharp
         const int R2_PIN = 8;//24;
         const int G2_PIN = 9;//21;
         const int B2_PIN = 10;//19;
+        const int P2R1_PIN = 12;
+        const int P2G1_PIN = 5;
+        const int P2B1_PIN = 6;
+        const int P2R2_PIN = 19;
+        const int P2G2_PIN = 13;
+        const int P2B2_PIN = 20;
         #endregion
 
         public GpioPin outputEnabled;
@@ -41,6 +47,14 @@ namespace LedMatrixEngineSharp
         public GpioPin r2;
         public GpioPin g2;
         public GpioPin b2;
+        public GpioPin P2r1;
+        public GpioPin P2g1;
+        public GpioPin P2b1;
+        public GpioPin P2r2;
+        public GpioPin P2g2;
+        public GpioPin P2b2;
+
+
 
         public GpioProxy()
         {
@@ -82,6 +96,25 @@ namespace LedMatrixEngineSharp
             g2.Write(GpioPinValue.Low);
             g2.SetDriveMode(GpioPinDriveMode.Output);
 
+            P2r1 = gpio.OpenPin(P2R1_PIN);
+            P2r1.Write(GpioPinValue.Low);
+            P2r1.SetDriveMode(GpioPinDriveMode.Output);
+            P2b1 = gpio.OpenPin(P2B1_PIN);
+            P2b1.Write(GpioPinValue.Low);
+            P2b1.SetDriveMode(GpioPinDriveMode.Output);
+            P2g1 = gpio.OpenPin(P2G1_PIN);
+            P2g1.Write(GpioPinValue.Low);
+            P2g1.SetDriveMode(GpioPinDriveMode.Output);
+            P2r2 = gpio.OpenPin(P2R2_PIN);
+            P2r2.Write(GpioPinValue.Low);
+            P2r2.SetDriveMode(GpioPinDriveMode.Output);
+            P2b2 = gpio.OpenPin(P2B2_PIN);
+            P2b2.Write(GpioPinValue.Low);
+            P2b2.SetDriveMode(GpioPinDriveMode.Output);
+            P2g2 = gpio.OpenPin(P2G2_PIN);
+            P2g2.Write(GpioPinValue.Low);
+            P2g2.SetDriveMode(GpioPinDriveMode.Output);
+
         }
 
         GpioPinValue lastr1;
@@ -90,6 +123,15 @@ namespace LedMatrixEngineSharp
         GpioPinValue lastr2;
         GpioPinValue lastg2;
         GpioPinValue lastb2;
+
+        GpioPinValue lastP2r1;
+        GpioPinValue lastP2g1;
+        GpioPinValue lastP2b1;
+        GpioPinValue lastP2r2;
+        GpioPinValue lastP2g2;
+        GpioPinValue lastP2b2;
+
+
         public void setRGB(GpioPinValue _r1, GpioPinValue _g1, GpioPinValue _b1, GpioPinValue _r2, GpioPinValue _g2, GpioPinValue _b2)
         {
             if (lastr1 != _r1)
@@ -129,7 +171,7 @@ namespace LedMatrixEngineSharp
             rowAddressA.Write((row & 1) == 1 ? GpioPinValue.High : GpioPinValue.Low); //1
             rowAddressB.Write((row & 2) == 2 ? GpioPinValue.High : GpioPinValue.Low); //2 /4
             rowAddressC.Write((row & 4) == 4 ? GpioPinValue.High : GpioPinValue.Low);// 4 /8
-            rowAddressD.Write((row & 8) == 8 ? GpioPinValue.High : GpioPinValue.Low);//8 /16
+            //rowAddressD.Write((row & 8) == 8 ? GpioPinValue.High : GpioPinValue.Low);//8 /16
 
         }
     }
