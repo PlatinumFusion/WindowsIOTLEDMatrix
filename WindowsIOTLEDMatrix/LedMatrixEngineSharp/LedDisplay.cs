@@ -30,13 +30,17 @@ namespace LedMatrixEngineSharp
         RowAddress raddress;
         public Color[] color1 { get; set; }
         public Color[] color2 { get; set; }
+        public Color[] color3 { get; set; }
+        public Color[] color4 { get; set; }
 
         public DisplayRow(int address, int width)
         {
             raddress = new RowAddress(address);
             color1 = new Color[width];
             color2 = new Color[width];
-            
+            color3 = new Color[width];
+            color4 = new Color[width];
+
         }
     }
     public class Plane
@@ -44,7 +48,7 @@ namespace LedMatrixEngineSharp
         public DisplayRow[] colormatrix { get; set; }
         public Plane()
         {
-            colormatrix = new DisplayRow[16]; //16
+            colormatrix = new DisplayRow[32]; //16
         }
     }
     public class RowAddress
@@ -59,7 +63,7 @@ namespace LedMatrixEngineSharp
             A = (address & 1) == 1; //1
             B = (address & 2) == 2; //2
             C = (address & 4) == 4; //4
-            D = (address & 8) == 8; //8
+            //D = (address & 8) == 8; //8
 
         }
     }

@@ -111,7 +111,7 @@
     <Compile Include="LedDisplay.cs" />
     <Compile Include="GpioProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RgbMatrix.cs" />
+    <Compile Include="RgbMatrix4s.cs" />
     <EmbeddedResource Include="Properties\LedMatrixEngineSharp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
