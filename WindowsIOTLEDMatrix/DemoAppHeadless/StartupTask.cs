@@ -9,7 +9,7 @@ using Windows.ApplicationModel.Background;
 using LedMatrixEngineSharp;
 using Microsoft.Graphics.Canvas.Text;
 using Windows.UI;
-
+//DEV2 Branch
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 
 namespace DemoAppHeadless
@@ -86,47 +86,47 @@ namespace DemoAppHeadless
 
                 //To Test the line by line
                 //******************************************
-                millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
-                if (millis > 1)
-                {
+                //millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
+                //if (millis > 1)
+                //{
 
-                    if (x >= 63)
-                    {
+                //    if (x >= 63)
+                //    {
 
-                        matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
-                        for (int y = 0; y < x; y++)
-                        {
-                            //matrix.drawPixel(y, 4, Color.FromArgb(255, 0, 0, 0));
-                            // matrix.drawPixel(y, 8, Color.FromArgb(255, 0, 0, 0));
-                            //matrix.Translater(y, 0, Color.FromArgb(255, 0, 0, 0));
-                            //matrix.Translater(y, 16, Color.FromArgb(255, 0, 0, 0));
-                        }
-                        x = 0;
-                        y1++;
-                    }
-                    else
+                //        matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
+                //        for (int y = 0; y < x; y++)
+                //        {
+                //            //matrix.drawPixel(y, 4, Color.FromArgb(255, 0, 0, 0));
+                //            // matrix.drawPixel(y, 8, Color.FromArgb(255, 0, 0, 0));
+                //            //matrix.Translater(y, 0, Color.FromArgb(255, 0, 0, 0));
+                //            //matrix.Translater(y, 16, Color.FromArgb(255, 0, 0, 0));
+                //        }
+                //        x = 0;
+                //        y1++;
+                //    }
+                //    else
 
-                    {
-                        if (y1 <= 31)
-                        {
-                            matrix.drawPixel(x, y1, Color.FromArgb(255, 255, 255, 255));
-                            //Debug.Write(x + "," + y1 + " ");
-                            //Debug.WriteLine(x + "," + y1);
-                        }
-                        else
-                        {
+                //    {
+                //        if (y1 <= 31)
+                //        {
+                //            matrix.drawPixel(x, y1, Color.FromArgb(255, 255, 255, 255));
+                //            //Debug.Write(x + "," + y1 + " ");
+                //            //Debug.WriteLine(x + "," + y1);
+                //        }
+                //        else
+                //        {
 
-                        }
-                        //matrix.drawPixel(8,4, Color.FromArgb(255, 255, 0, 0));
-                        //matrix.drawPixel(0,0, Color.FromArgb(255, 0, 255, 0));
-                        //matrix.drawPixel(x, 8, Color.FromArgb(255, 255, 255, 255));
-                        //matrix.Translater(x, 0, Color.FromArgb(255, 255, 255, 255));
-                        x++;
+                //        }
+                //        //matrix.drawPixel(8,4, Color.FromArgb(255, 255, 0, 0));
+                //        //matrix.drawPixel(0,0, Color.FromArgb(255, 0, 255, 0));
+                //        //matrix.drawPixel(x, 8, Color.FromArgb(255, 255, 255, 255));
+                //        //matrix.Translater(x, 0, Color.FromArgb(255, 255, 255, 255));
+                //        x++;
 
-                    }
-                    epoch = DateTime.UtcNow;
-                    //}
-                }//*******************************************************************
+                //    }
+                //    epoch = DateTime.UtcNow;
+                //    //}
+                //}//*******************************************************************
 
 
                 //To TEST the CHAR
