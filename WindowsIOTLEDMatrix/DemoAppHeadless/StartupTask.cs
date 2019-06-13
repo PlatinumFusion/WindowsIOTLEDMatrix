@@ -9,29 +9,39 @@ using Windows.ApplicationModel.Background;
 using LedMatrixEngineSharp;
 using Microsoft.Graphics.Canvas.Text;
 using Windows.UI;
+using Microsoft.Graphics.Canvas.Brushes;
+//using Windows.UI.Xaml.Media;
+using System.Drawing;
 //Master Branch
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 
 namespace DemoAppHeadless
 {
+
     public sealed class StartupTask : IBackgroundTask
     {
         //This is a headless app for Win IOT
-
+        string lapstring = ""; // this is set to the Lapcount
         //Led Matrix
         RgbMatrix4s matrix;
         System.Numerics.Vector2 v2;
         System.Numerics.Vector2 v1;
+        ServerClass sclass = new ServerClass();
+        MainTCP mTCP = new MainTCP();
+        int x = 0;
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             //initialize the led matrix
-           
+            x = x + 1;
             matrix = new RgbMatrix4s();
-            
+             //sclass.Start();
+             //mTCP.New();
+            Windows.System.Threading.ThreadPool.RunAsync(mTCP.New, Windows.System.Threading.WorkItemPriority.Low);
             //Don't need await
             Windows.System.Threading.ThreadPool.RunAsync(matrix.updateDisplay, Windows.System.Threading.WorkItemPriority.High);
             //draw on the led matrix
             drawSomething();
+            Debug.WriteLine(x.ToString());
         }
 
         private void drawSomething()
@@ -86,81 +96,111 @@ namespace DemoAppHeadless
 
                 //To Test the line by line
                 //******************************************
-                millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
-                if (millis > 1)
-                {
+                //millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
+                //if (millis > 1)
+                //{
 
-                    if (x >= 63)
-                    {
+                //    if (x >= 63)
+                //    {
 
-                        matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
-                        for (int y = 0; y < x; y++)
-                        {
-                            //matrix.drawPixel(y, 4, Color.FromArgb(255, 0, 0, 0));
-                            // matrix.drawPixel(y, 8, Color.FromArgb(255, 0, 0, 0));
-                            //matrix.Translater(y, 0, Color.FromArgb(255, 0, 0, 0));
-                            //matrix.Translater(y, 16, Color.FromArgb(255, 0, 0, 0));
-                        }
-                        x = 0;
-                        y1++;
-                    }
-                    else
+                //        matrix.Session.Clear(Windows.UI.Color.FromArgb(255, 0, 0, 0));
+                //        for (int y = 0; y < x; y++)
+                //        {
+                //            //matrix.drawPixel(y, 4, Color.FromArgb(255, 0, 0, 0));
+                //            // matrix.drawPixel(y, 8, Color.FromArgb(255, 0, 0, 0));
+                //            //matrix.Translater(y, 0, Color.FromArgb(255, 0, 0, 0));
+                //            //matrix.Translater(y, 16, Color.FromArgb(255, 0, 0, 0));
+                //        }
+                //        x = 0;
+                //        y1++;
+                //    }
+                //    else
 
-                    {
-                        if (y1 <= 31)
-                        {
-                            matrix.drawPixel(x, y1, Color.FromArgb(255, 255, 255, 255));
-                            //Debug.Write(x + "," + y1 + " ");
-                            //Debug.WriteLine(x + "," + y1);
-                        }
-                        else
-                        {
+                //    {
+                //        if (y1 <= 31)
+                //        {
+                //            matrix.drawPixel(x, y1, Windows.UI.Color.FromArgb(255, 255, 255, 255));
+                //            //Debug.Write(x + "," + y1 + " ");
+                //            //Debug.WriteLine(x + "," + y1);
+                //        }
+                //        else
+                //        {
 
-                        }
-                        //matrix.drawPixel(8,4, Color.FromArgb(255, 255, 0, 0));
-                        //matrix.drawPixel(0,0, Color.FromArgb(255, 0, 255, 0));
-                        //matrix.drawPixel(x, 8, Color.FromArgb(255, 255, 255, 255));
-                        //matrix.Translater(x, 0, Color.FromArgb(255, 255, 255, 255));
-                        x++;
+                //        }
+                //        //matrix.drawPixel(8,4, Color.FromArgb(255, 255, 0, 0));
+                //        //matrix.drawPixel(0,0, Color.FromArgb(255, 0, 255, 0));
+                //        //matrix.drawPixel(x, 8, Color.FromArgb(255, 255, 255, 255));
+                //        //matrix.Translater(x, 0, Color.FromArgb(255, 255, 255, 255));
+                //        x++;
 
-                    }
-                    epoch = DateTime.UtcNow;
-                    //}
-                }//*******************************************************************
+                //    }
+                //    epoch = DateTime.UtcNow;
+                //    //}
+                //}//*******************************************************************
 
 
                 //To TEST the CHAR
                 //matrix.settextcursor(5, 8);
-                matrix.setTextCursor(2, 0);
+                matrix.setTextCursor(10, 10);
                 //matrix.setfontsize(3);
                 matrix.setFontSize(3);
-                matrix.setFontColor(Color.FromArgb(255, 255, 0, 0));
-                string sentence = "Platinum";
-                char[] charArr = sentence.ToCharArray();
-                foreach (char ch in charArr)
+                matrix.setBackGroundColor(Windows.UI.Color.FromArgb(MainTCP.RaceColor.A, MainTCP.RaceColor.R, MainTCP.RaceColor.G, MainTCP.RaceColor.B));
+                //matrix.Session.FillRectangle(0, 0, 64, 32, );
+                //matrix.setFontColor(Color.FromArgb(255, 255, 0, 0));
+                CanvasSolidColorBrush SolidColorBackground = new CanvasSolidColorBrush(matrix.Session,Windows.UI.Color.FromArgb(MainTCP.RaceColor.A, MainTCP.RaceColor.R, MainTCP.RaceColor.G, MainTCP.RaceColor.B));
+                matrix.Session.FillRectangle(0, 0, 64, 32, SolidColorBackground);
+                matrix.setFontColor(Windows.UI.Color.FromArgb(MainTCP.RaceColor.A, MainTCP.RaceColor.R, MainTCP.RaceColor.G, MainTCP.RaceColor.B));
+                //for (int x1 = 0; x < 64; x++)
+                //{
+                //    for (int y = 0; y < 32; y++)
+                //    {
+                //        matrix.drawPixel(x1, y, Windows.UI.Color.FromArgb(255, 0, 0, 0));
+                //    }
+                //}
+                //matrix.Session.DrawLine(0, 0, 32, 64, Windows.UI.Color.FromArgb(255, 255, 255, 255));
+                //matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Windows.UI.Color.FromArgb(255, 255, 0, 0), ff);
+                if (MainTCP.lapcountString != null)
                 {
-                    matrix.writeChar(ch);
+                    //matrix.Flush(0,0,64,32);
+                    if (lapstring != MainTCP.lapcountString)
+                    {
+                        lapstring = MainTCP.lapcountString;
+
+                    }
+                    matrix.Flush(0, 0, 64, 32);
+                    
+
+                    char[] charArr = lapstring.ToCharArray();
+                    foreach (char ch in charArr)
+                    {
+                        matrix.writeChar(ch);
+                    }
+
                 }
-                matrix.setTextCursor(2, 10);
-                //matrix.setfontsize(3);
-                matrix.setFontSize(3);
-                matrix.setFontColor(Color.FromArgb(255, 0, 255, 0));
-                sentence = "Fusion";
-                charArr = sentence.ToCharArray();
-                foreach (char ch in charArr)
-                {
-                    matrix.writeChar(ch);
-                }
-                matrix.setTextCursor(5, 20);
-                //matrix.setfontsize(3);
-                matrix.setFontSize(3);
-                matrix.setFontColor(Color.FromArgb(255, 0, 0, 255));
-                sentence = "Technology";
-                charArr = sentence.ToCharArray();
-                foreach (char ch in charArr)
-                {
-                    matrix.writeChar(ch);
-                }
+                else
+                {  }
+
+                //
+                //matrix.setTextCursor(2, 10);
+                ////matrix.setfontsize(3);
+                //matrix.setFontSize(3);
+                ////matrix.setFontColor(Color.FromArgb(255, 0, 255, 0));
+                //sentence = "Fusion";
+                //charArr = sentence.ToCharArray();
+                //foreach (char ch in charArr)
+                //{
+                //    matrix.writeChar(ch);
+                //}
+                ////matrix.setTextCursor(5, 20);
+                ////matrix.setfontsize(3);
+                //matrix.setFontSize(3);
+                //matrix.setFontColor(Color.FromArgb(255, 0, 0, 255));
+                //sentence = "Technology";
+                //charArr = sentence.ToCharArray();
+                //foreach (char ch in charArr)
+                //{
+                //    matrix.writeChar(ch);
+                //}
                 //if you want to write each Char
                 //matrix.writeChar('H');
                 //matrix.writeChar('I');

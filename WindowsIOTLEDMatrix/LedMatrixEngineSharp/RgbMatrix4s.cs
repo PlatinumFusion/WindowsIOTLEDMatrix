@@ -20,7 +20,9 @@ namespace LedMatrixEngineSharp
         public GpioProxy proxy;
 
         public Color _fontColor { get; set; }
+        public Color _backColor { get; set; }
         public int _fontHeight { get; set; }
+       
         public int _fontSize { get; set; }
         public int _fontWidth { get; set; }
         public int _textCursorX { get;set; }
@@ -42,8 +44,8 @@ namespace LedMatrixEngineSharp
         
         //This is important.  The width is set to 128, which is 2 times the value of the actual pixels for the width.  I believe this is because the data clocked into the matrix needs to be 64 bits instead of 32.
         
-        int Width = 128; 
-        int Height = 16;
+        int Width = 128; //128
+        int Height = 16; //16
         public RgbMatrix4s()
         {
             #region "Fonts"
@@ -350,8 +352,8 @@ namespace LedMatrixEngineSharp
             proxy.setupOutputBits();
 
              device = new CanvasDevice();
-             target = new CanvasRenderTarget(device, Width, Height, 64); 
-             Session = target.CreateDrawingSession();
+             target = new CanvasRenderTarget(device, 64, 32, 8); //(device, Width, Height, 64); 
+            Session = target.CreateDrawingSession();
 
             _fontColor = white;
             _fontSize = 1;
@@ -373,7 +375,7 @@ namespace LedMatrixEngineSharp
 	                    // middle of row-clocking, thus have RowClockTime / 2
 	                    (128 * RowClockTime) - RowClockTime, // too much flicker.
                     };
-            display = new LedDisplay(pwmbits, Width);
+            display = new LedDisplay(pwmbits, Width);//Width
             clearDisplay();
         }
 
@@ -397,7 +399,7 @@ namespace LedMatrixEngineSharp
             }
         }
 
-        public void clearDisplay()
+        public void clearDisplay() //Flush does this
         {
             //foreach (DisplayRow row in display.colormatrix)
             //{
@@ -608,14 +610,14 @@ namespace LedMatrixEngineSharp
                             //
                             // However, in particular for longer chaining, it seems we need some more
                             // wait time to settle.
-                            //long StabilizeWaitNanos = 625; //TODO: mateo was 256
+                            long StabilizeWaitNanos = 625; //TODO: mateo was 256
                             for (int col = 0; col < (Width); col++)//col++ //TODO: Columncount
                             {
-                                //proxy.setRGB(GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low);
+                                proxy.setRGB(GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low, GpioPinValue.Low);
 
 
 
-                                //sleepNanos(StabilizeWaitNanos);
+                               // sleepNanos(StabilizeWaitNanos);
                                 //_gpio->setBits(out,0); //serialmask
                                 //proxy.setRGB(myrow.color1[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High,
                                 //    myrow.color1[col].G == 0 ? GpioPinValue.Low : GpioPinValue.High,
@@ -706,7 +708,7 @@ namespace LedMatrixEngineSharp
                                 proxy.clock.Write(GpioPinValue.High);
                                 proxy.clock.Write(GpioPinValue.Low);
                                 //makeSleep(100);
-                                //Task.Delay(TimeSpan.FromTicks(100));
+                                Task.Delay(TimeSpan.FromTicks(100));
                             }
 
 
@@ -745,7 +747,10 @@ namespace LedMatrixEngineSharp
             }
         }
 
-
+        public void setBackGroundColor(Color color)
+        {
+            _backColor = color;
+        }
 
         public void setTextCursor(int x, int y)
         {
@@ -814,9 +819,24 @@ namespace LedMatrixEngineSharp
         public void putChar(int x, int y, char c, int size,
             Color color) 
         {
+
             byte[] font = Font5x7;
             int fontWidth = 5;
             int fontHeight = 7;
+
+            
+
+
+                //for (int i = 0; i < lc.Length; i++)
+                //{
+                //    int posx = i % Width;
+                //    int posy = i / Width;
+                //    drawPixel(posx, posy, _backColor);
+                        
+                    
+
+                //}
+            
 
             if (size == 1) //small (3x5)
             {
@@ -874,6 +894,8 @@ namespace LedMatrixEngineSharp
                 {
                     for (int y = fy; y < maxY; y++)
                     {
+
+
 
 
                         if (y < 8)
