@@ -9,7 +9,7 @@ using Windows.ApplicationModel.Background;
 using LedMatrixEngineSharp;
 using Microsoft.Graphics.Canvas.Text;
 using Windows.UI;
-
+//Master Branch
 // The Background Application template is documented at http://go.microsoft.com/fwlink/?LinkID=533884&clcid=0x409
 
 namespace DemoAppHeadless
