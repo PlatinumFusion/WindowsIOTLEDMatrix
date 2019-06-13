@@ -39,9 +39,11 @@ namespace LedMatrixEngineSharp
         byte[] Font4x6;
         byte[] Font3x5;
 
-        //Seems to need to be 2x the width for 4s
-        int Width = 128; //MB changing this to see if I can set the Height? was 128 now 64 
-        int Height = 16; //MB changing this to see if I can set the Height? was 32 now 16
+        
+        //This is important.  The width is set to 128, which is 2 times the value of the actual pixels for the width.  I believe this is because the data clocked into the matrix needs to be 64 bits instead of 32.
+        
+        int Width = 128; 
+        int Height = 16;
         public RgbMatrix4s()
         {
             #region "Fonts"
@@ -348,7 +350,7 @@ namespace LedMatrixEngineSharp
             proxy.setupOutputBits();
 
              device = new CanvasDevice();
-             target = new CanvasRenderTarget(device, Width, Height, 64); //64
+             target = new CanvasRenderTarget(device, Width, Height, 64); 
              Session = target.CreateDrawingSession();
 
             _fontColor = white;
@@ -356,8 +358,8 @@ namespace LedMatrixEngineSharp
             _fontWidth = 3;
             _fontHeight = 5;
             _wordWrap = true;
-            RowsPerSubPanel = 8; //16 //8
-            RowClockTime = 50; //100
+            RowsPerSubPanel = 8; 
+            RowClockTime = 50; 
             RowSleepNanos = new long[]  {   // Only using the first PwmBits elements.
                 (1 * RowClockTime) - RowClockTime,
                         (2 * RowClockTime) - RowClockTime,
@@ -418,121 +420,12 @@ namespace LedMatrixEngineSharp
         
         public void drawPixel(int x, int y, Color c)
         {
-            //my translator
-            //if (y > 3 && y < 8)
-            //{
-            //    y = y - 4;
-            //    if (x <= 7)
-            //    {
 
-            //    }
-            //    else if (x >= 8 && x <= 15) //2=4
-            //    {
-            //        x = x + 8;
-            //    }
-            //    else if (x >= 16 && x <= 23)
-            //    {
-            //        x = x + 16;
-            //    }
-            //    else if (x >= 24 && x <= 31)
-            //    {
-            //        x = x + 24;
-            //    }
-            //    else if (x >= 32 && x <= 39) // if you have two chained panels
-            //    {
-
-            //        x = x + 32;
-            //    }
-            //    else if (x >= 40 && x <= 47)
-            //    {
-            //        x = x + 40;
-            //    }
-            //    else if (x >= 48 && x <= 55)
-            //    {
-            //        x = x + 48;
-            //    }
-            //    else if (x >= 56 && x <= 63)
-            //    {
-            //        x = x + 56;
-            //    }
-            //    else
-            //    { }
-
-            //}
-            //else if (y < 4 || y > 15 && y < 20)
-            //{
-
-
-            //    if (x <= 7)
-            //    {
-            //        x = x + 8;
-            //    }
-            //    else if (x >= 8 && x <= 15) //2=4
-            //    {
-            //        x = x + 16;
-            //    }
-            //    else if (x >= 16 && x <= 23)
-            //    {
-            //        x = x + 24;
-            //    }
-            //    else if (x >= 24 && x <= 31)
-            //    {
-            //        x = x + 32;
-            //    }
-            //    else if (x >= 32 && x <= 39)
-            //    {
-            //        x = x + 40;
-            //    }
-            //    else if (x >= 40 && x <= 47)
-            //    {
-            //        x = x + 48;
-            //    }
-            //    else if (x >= 48 && x <= 55)
-            //    {
-            //        x = x + 56;
-            //    }
-            //    else if (x >= 56 && x <= 63)
-            //    {
-            //        x = x + 63;
-            //    }
-            //    else
-            //    {
-
-            //        x = 0;
-            //    }
-            //}
-            //else if (y > 7)
-            //{
-            //    if (x <= 7)
-            //    {
-            //        x = x + 8;
-            //    }
-            //    else if (x >= 8 && x <= 15) //2=4
-            //    {
-            //        x = x + 16;
-            //    }
-            //    else if (x >= 16 && x <= 23)
-            //    {
-            //        x = x + 24;
-            //    }
-            //    else if (x >= 24 && x <= 31)
-            //    {
-            //        x = x + 32;
-            //    }
-            //    else
-            //    {
-
-            //        x = 0;
-            //    }
-            //}
             //*************************************************************
             //My New Translator
             if ((y < 4) || (y > 7 && y < 12) || (y > 15 && y < 20) || (y > 23 && y < 28))
             {
-                //1 --> 2
-                //2 --> 4
-                //3 --> 6
-                //4 --> 8
+
                 if (y > 7 && y < 12)
                     y = y - 4;
                 if (y > 15 && y < 20)
@@ -577,11 +470,6 @@ namespace LedMatrixEngineSharp
             }
             else
             {
-                //1 --> 1
-                //Do nothing
-                //2 --> 3
-                //3 --> 5
-                //4 --> 7
                 if (y> 3 && y< 8)
                 y = y - 4;
                 if (y > 11 && y < 16)
@@ -590,18 +478,11 @@ namespace LedMatrixEngineSharp
                     y = y - 12;
                 if (y > 27 && y < 32)
                     y = y - 16;
-
-
-                //if (y > 11 && y < 16)
-                //    y = y - 8;
-
-
-
                 if (x <= 7)
                 {
 
                 }
-                else if (x >= 8 && x <= 15) //2=4
+                else if (x >= 8 && x <= 15)
                 {
                     x = x + 8;
                 }
@@ -613,7 +494,7 @@ namespace LedMatrixEngineSharp
                 {
                     x = x + 24;
                 }
-                else if (x >= 32 && x <= 39) // if you have two chained panels
+                else if (x >= 32 && x <= 39) 
                 {
 
                     x = x + 32;
@@ -635,57 +516,42 @@ namespace LedMatrixEngineSharp
             }
 
 
-
-
-
-
-
-            //if (y > 31)//(y> 15)//(y > 31)
-            //{
-            //    x = 127 - x; //127 - x;
-            //    y = 63 - y; //63 - y;
-            //}
-
             int red = c.R;
             int green = c.G;
             int blue = c.B;
-            //Debug.WriteLine(red);
-            red >>= 8 - pwmbits;//8  All these were 8
+            red >>= 8 - pwmbits;
             green >>= 8 - pwmbits;
             blue >>= 8 - pwmbits;
-            //Debug.WriteLine(red);
             for (int b = 0; b < pwmbits; b++)
             {
-                int mask = 1 << b; //1
-                if (y<4) //16  y<16 I had 4
+                int mask = 1 << b;
+                if (y<4)
                 {
-                    // Upper sub-panel
+                    // Upper sub-panel on top chain Row
                     display.planes[b].colormatrix[y].color1[x].A = c.A;
-                    //Debug.WriteLine((byte)((red & mask) == mask ? 255 : 0));
                     display.planes[b].colormatrix[y].color1[x].R = (byte)((red & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y].color1[x].G = (byte)((green & mask) == mask ? 255 : 0);
-                    display.planes[b].colormatrix[y].color1[x].B = (byte)((blue & mask) == mask ? 255 : 0);
-                    //Debug.WriteLine((byte)((red & mask) == mask ? 255 : 0));
-                   // Debug.WriteLine(
-                }
+                    display.planes[b].colormatrix[y].color1[x].B = (byte)((blue & mask) == mask ? 255 : 0);}
                 else if (y>3 && y<8)
                 {
-                    // Lower sub-panel
-                    display.planes[b].colormatrix[y - 4].color2[x].A = c.A; //-16 i had -8
+                    // Lower sub-panel on top chain Row
+                    display.planes[b].colormatrix[y - 4].color2[x].A = c.A; 
                     display.planes[b].colormatrix[y - 4].color2[x].R = (byte)((red & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 4].color2[x].G = (byte)((green & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 4].color2[x].B = (byte)((blue & mask) == mask ? 255 : 0);
                 }
                 else if (y>7 && y<12)
                 {
-                    display.planes[b].colormatrix[y-8].color3[x].A = c.A; //-16 i had -8
+                    // Upper sub-panel on middle (bottom) chain Row
+                    display.planes[b].colormatrix[y-8].color3[x].A = c.A; 
                     display.planes[b].colormatrix[y-8].color3[x].R = (byte)((red & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y-8].color3[x].G = (byte)((green & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y-8].color3[x].B = (byte)((blue & mask) == mask ? 255 : 0);
                 }
                 else if (y>11 && y<16)
                 {
-                    display.planes[b].colormatrix[y - 12].color4[x].A = c.A; //-16 i had -8
+                     // Lower sub-panel on middle (bottom) chain Row
+                    display.planes[b].colormatrix[y - 12].color4[x].A = c.A; 
                     display.planes[b].colormatrix[y - 12].color4[x].R = (byte)((red & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 12].color4[x].G = (byte)((green & mask) == mask ? 255 : 0);
                     display.planes[b].colormatrix[y - 12].color4[x].B = (byte)((blue & mask) == mask ? 255 : 0);

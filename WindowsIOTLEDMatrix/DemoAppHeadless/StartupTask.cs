@@ -53,20 +53,17 @@ namespace DemoAppHeadless
             long millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
             int x = 0;
             int y1 = 0;
-            //matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255, 255, 0, 0), ff);
+            //matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255, 255, 0, 0), ff);  //Untested
             while (true)
             {
-                //TimeSpan ts = DateTime.Now. + TimeSpan.FromSeconds(2);
+                //matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255, 255, 0, 0), ff); // Untested
 
-                //matrix.Session.DrawText("Hello World!", 0, 0, 128, 16, Color.FromArgb(255, 255, 0, 0), ff);
-
-                //draw a circle
+                //draw a circle -- Un Tested -- plus I think I need to make everything go though the drawPixel function
                 //matrix.Session.DrawCircle(54, 16, 10, Color.FromArgb(255, 0, 255, 0), 1);
                 //matrix.Session.FillRectangle(0, 0, 16, 32, Color.FromArgb(255, 255, 255, 255));
                 //matrix.Session.DrawLine((0,0),(5,0), Color.FromArgb(255, 255, 255, 255));
                 //matrix.Session.DrawLine(v1, v2, Color.FromArgb(255, 255, 255, 255));
 
-                //This is the set text
 
 
 
@@ -82,20 +79,18 @@ namespace DemoAppHeadless
                 //}
 
 
-
+                //If you want to draw pixels
                 //matrix.drawPixel(0, 5, Color.FromArgb(255, 255, 0, 0));
-
-                // Save this for testing every second
-                millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
                 //matrix.drawPixel(0, 0, Color.FromArgb(255, 255, 255, 255));
 
 
                 //To Test the line by line
                 //******************************************
+                millis = (long)((DateTime.UtcNow - epoch).TotalMilliseconds);
                 if (millis > 1)
                 {
 
-                    if (x >= 63)//31
+                    if (x >= 63)
                     {
 
                         matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
@@ -108,7 +103,6 @@ namespace DemoAppHeadless
                         }
                         x = 0;
                         y1++;
-                        //Debug.WriteLine("");
                     }
                     else
 
@@ -167,66 +161,17 @@ namespace DemoAppHeadless
                 {
                     matrix.writeChar(ch);
                 }
+                //if you want to write each Char
                 //matrix.writeChar('H');
                 //matrix.writeChar('I');
 
 
 
 
-                // Save until here for testin every second
-                //}
-                //for (int x1 = 0; x1 < 64; x1++)
-                //{
-                //    for (int yy = 0; yy <16; yy++)
-                //    matrix.drawPixel(x1, yy, Color.FromArgb(255, 255, 255, 255));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //for (int x = 0; x < 24; x++)
-                //{
-                //    matrix.drawPixel(x, 2, Color.FromArgb(255, 0, 255, 255));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //for (int x = 0; x < 32; x++)
-                //{
-                //    matrix.drawPixel(x, 3, Color.FromArgb(255, 255, 0, 0));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //for (int x = 0; x < 64; x++)
-                //{
-                //    matrix.drawPixel(x, 4, Color.FromArgb(255, 255, 0, 0));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //for (int x = 0; x < 1; x++)
-                //{
-                //    matrix.drawPixel(x, 1, Color.FromArgb(255, 0, 255, 0));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //for (int y = 0; y < 8; y++)
-                //{
-                //    matrix.drawPixel(3, y, Color.FromArgb(255, 255, 0, 0));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
+                //matrix.clearDisplay(); //This does not work
 
-                //matrix.clearDisplay();
-                //System.Threading.Tasks.Task.Delay(1000);
-                //for (int x = 15; x < 0; x--)
-                //{
-                //    matrix.drawPixel(x, 0, Color.FromArgb(255, 255, 255, 255));
-                //    //System.Threading.Tasks.Task.Delay(1000);
-                //    //matrix.drawPixel(x+1, 0, Color.FromArgb(0, 0, 0, 0));
-                //}
-                //matrix.drawPixel(5, 0, Color.FromArgb(255, 255, 255, 255));
-                // matrix.Session.DrawLine(v1, v2, Color.FromArgb(255, 255, 255, 255));
-                //System.Threading.Tasks.Task.Delay(1000);
-                //matrix.clearDisplay();
             }
-            //flush the win2d to the led matrix for the specified rectangle 
+            //flush the win2d to the led matrix for the specified rectangle  //Does not work
             //matrix.Flush(0, 0, 128, 32);
         }
     }
