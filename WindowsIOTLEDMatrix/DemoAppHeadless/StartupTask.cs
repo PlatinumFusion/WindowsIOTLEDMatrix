@@ -36,12 +36,8 @@ namespace DemoAppHeadless
 
         private void drawSomething()
         {
-            //System.Threading.Tasks.Task delay = System.Threading.Tasks.Task.Delay(1000);
-            //clear the matrix
-            matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
-
-            //matrix.RowsPer = 4;
-
+            
+            //matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0)); //This still does not work
             CanvasTextFormat ff = new CanvasTextFormat();
             ff.FontSize = 16;
             ff.FontFamily = "Courier New";
@@ -49,7 +45,7 @@ namespace DemoAppHeadless
             //write hello world
             v1 = new System.Numerics.Vector2();
             v2 = new System.Numerics.Vector2();
-            v2.X = 64;
+            v2.X = 64; //This is still untested
             v2.Y = 0;
             v1.X = 0;
             v1.Y = 0;
