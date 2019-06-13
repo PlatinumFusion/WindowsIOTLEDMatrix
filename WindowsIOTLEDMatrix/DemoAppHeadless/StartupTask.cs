@@ -94,12 +94,12 @@ namespace DemoAppHeadless
                 //matrix.drawPixel(0, 0, Color.FromArgb(255, 255, 255, 255));
 
 
-
+                //To Test the line by line
                 //******************************************
                 if (millis > 1)
                 {
 
-                    if (x >= 128)//31
+                    if (x >= 63)//31
                     {
 
                         matrix.Session.Clear(Color.FromArgb(255, 0, 0, 0));
@@ -112,13 +112,15 @@ namespace DemoAppHeadless
                         }
                         x = 0;
                         y1++;
+                        //Debug.WriteLine("");
                     }
                     else
 
                     {
-                        if (y1 <= 15)
+                        if (y1 <= 31)
                         {
                             matrix.drawPixel(x, y1, Color.FromArgb(255, 255, 255, 255));
+                            //Debug.Write(x + "," + y1 + " ");
                             //Debug.WriteLine(x + "," + y1);
                         }
                         else
@@ -136,22 +138,51 @@ namespace DemoAppHeadless
                     //}
                 }//*******************************************************************
 
-                //matrix.setTextCursor(3, 8);
-                //matrix.setFontSize(3);
-                //matrix.setFontColor(Color.FromArgb(255, 255, 0, 0));
+
+                //To TEST the CHAR
+                //matrix.settextcursor(5, 8);
+                matrix.setTextCursor(2, 0);
+                //matrix.setfontsize(3);
+                matrix.setFontSize(3);
+                matrix.setFontColor(Color.FromArgb(255, 255, 0, 0));
+                string sentence = "Platinum";
+                char[] charArr = sentence.ToCharArray();
+                foreach (char ch in charArr)
+                {
+                    matrix.writeChar(ch);
+                }
+                matrix.setTextCursor(2, 10);
+                //matrix.setfontsize(3);
+                matrix.setFontSize(3);
+                matrix.setFontColor(Color.FromArgb(255, 0, 255, 0));
+                sentence = "Fusion";
+                charArr = sentence.ToCharArray();
+                foreach (char ch in charArr)
+                {
+                    matrix.writeChar(ch);
+                }
+                matrix.setTextCursor(5, 20);
+                //matrix.setfontsize(3);
+                matrix.setFontSize(3);
+                matrix.setFontColor(Color.FromArgb(255, 0, 0, 255));
+                sentence = "Technology";
+                charArr = sentence.ToCharArray();
+                foreach (char ch in charArr)
+                {
+                    matrix.writeChar(ch);
+                }
                 //matrix.writeChar('H');
                 //matrix.writeChar('I');
-                //matrix.writeChar(' ');
 
-                //matrix.writeChar(' ');
 
 
 
                 // Save until here for testin every second
                 //}
-                //for (int x = 0; x < 16; x++)
+                //for (int x1 = 0; x1 < 64; x1++)
                 //{
-                //    matrix.drawPixel(x, 1, Color.FromArgb(255, 255, 255, 0));
+                //    for (int yy = 0; yy <16; yy++)
+                //    matrix.drawPixel(x1, yy, Color.FromArgb(255, 255, 255, 255));
                 //    //System.Threading.Tasks.Task.Delay(1000);
                 //    //matrix.drawPixel(x, 0, Color.FromArgb(0, 0, 0, 0));
                 //}

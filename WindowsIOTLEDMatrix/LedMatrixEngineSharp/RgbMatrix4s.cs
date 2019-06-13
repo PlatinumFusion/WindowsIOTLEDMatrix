@@ -357,7 +357,7 @@ namespace LedMatrixEngineSharp
             _fontHeight = 5;
             _wordWrap = true;
             RowsPerSubPanel = 8; //16 //8
-            RowClockTime = 100; //100
+            RowClockTime = 50; //100
             RowSleepNanos = new long[]  {   // Only using the first PwmBits elements.
                 (1 * RowClockTime) - RowClockTime,
                         (2 * RowClockTime) - RowClockTime,
@@ -413,22 +413,13 @@ namespace LedMatrixEngineSharp
             //    }
             //}
         }
-        public void Translater(int x, int y, Color c)
-        {
-            if ((x <= 7) || (x >= 16 & x <= 23) || x >= 32 & x <= 63)
-            {
-                drawPixel(x + 8, y, c);
-            }
-            if (x >= 8 & x <= 15)
-            {
-                drawPixel(x + 16, y, c);
-            }
 
-        }
+
+        
         public void drawPixel(int x, int y, Color c)
         {
             //my translator
-            //if (y > 3 && y < 8 )
+            //if (y > 3 && y < 8)
             //{
             //    y = y - 4;
             //    if (x <= 7)
@@ -488,19 +479,19 @@ namespace LedMatrixEngineSharp
             //    {
             //        x = x + 32;
             //    }
-            //    else if (x>=32 && x<=39)
+            //    else if (x >= 32 && x <= 39)
             //    {
             //        x = x + 40;
             //    }
-            //    else if(x>=40 && x<=47)
+            //    else if (x >= 40 && x <= 47)
             //    {
             //        x = x + 48;
             //    }
-            //    else if (x>=48 && x<=55)
+            //    else if (x >= 48 && x <= 55)
             //    {
             //        x = x + 56;
             //    }
-            //    else if (x>=56 && x<=63)
+            //    else if (x >= 56 && x <= 63)
             //    {
             //        x = x + 63;
             //    }
@@ -510,7 +501,7 @@ namespace LedMatrixEngineSharp
             //        x = 0;
             //    }
             //}
-            //else if (y>7)
+            //else if (y > 7)
             //{
             //    if (x <= 7)
             //    {
@@ -534,11 +525,114 @@ namespace LedMatrixEngineSharp
             //        x = 0;
             //    }
             //}
-//*************************************************************
-            //if (y <= 3)
-            //{
+            //*************************************************************
+            //My New Translator
+            if ((y < 4) || (y > 7 && y < 12) || (y > 15 && y < 20) || (y > 23 && y < 28))
+            {
+                //1 --> 2
+                //2 --> 4
+                //3 --> 6
+                //4 --> 8
+                if (y > 7 && y < 12)
+                    y = y - 4;
+                if (y > 15 && y < 20)
+                    y = y - 8;
+                if (y > 23 && y < 28)
+                    y = y - 12;
 
-        //}
+                if (x <= 7)
+                {
+                    x = x + 8;
+                }
+                else if (x >= 8 && x <= 15) //2=4
+                {
+                    x = x + 16;
+                }
+                else if (x >= 16 && x <= 23)
+                {
+                    x = x + 24;
+                }
+                else if (x >= 24 && x <= 31)
+                {
+                    x = x + 32;
+                }
+                else if (x >= 32 && x <= 39)
+                {
+                    x = x + 40;
+                }
+                else if (x >= 40 && x <= 47)
+                {
+                    x = x + 48;
+                }
+                else if (x >= 48 && x <= 55)
+                {
+                    x = x + 56;
+                }
+                else if (x >= 56 && x <= 63)
+                {
+                    x = x + 64;
+                }
+                else
+                { }
+            }
+            else
+            {
+                //1 --> 1
+                //Do nothing
+                //2 --> 3
+                //3 --> 5
+                //4 --> 7
+                if (y> 3 && y< 8)
+                y = y - 4;
+                if (y > 11 && y < 16)
+                y = y - 8;
+                if (y > 19 && y < 24)
+                    y = y - 12;
+                if (y > 27 && y < 32)
+                    y = y - 16;
+
+
+                //if (y > 11 && y < 16)
+                //    y = y - 8;
+
+
+
+                if (x <= 7)
+                {
+
+                }
+                else if (x >= 8 && x <= 15) //2=4
+                {
+                    x = x + 8;
+                }
+                else if (x >= 16 && x <= 23)
+                {
+                    x = x + 16;
+                }
+                else if (x >= 24 && x <= 31)
+                {
+                    x = x + 24;
+                }
+                else if (x >= 32 && x <= 39) // if you have two chained panels
+                {
+
+                    x = x + 32;
+                }
+                else if (x >= 40 && x <= 47)
+                {
+                    x = x + 40;
+                }
+                else if (x >= 48 && x <= 55)
+                {
+                    x = x + 48;
+                }
+                else if (x >= 56 && x <= 63)
+                {
+                    x = x + 56;
+                }
+                else
+                { }
+            }
 
 
 
@@ -672,7 +766,6 @@ namespace LedMatrixEngineSharp
                                 GpioPinValue _b2 = myrow.color2[col].B == 0 ? GpioPinValue.Low : GpioPinValue.High;
 
                                 GpioPinValue P2_r1 = myrow.color3[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High;
-                               
                                 GpioPinValue P2_g1 = myrow.color3[col].G == 0 ? GpioPinValue.Low : GpioPinValue.High;
                                 GpioPinValue P2_b1 = myrow.color3[col].B == 0 ? GpioPinValue.Low : GpioPinValue.High;
                                 GpioPinValue P2_r2 = myrow.color4[col].R == 0 ? GpioPinValue.Low : GpioPinValue.High; //Sholdn't need this for troubleshooting
@@ -729,11 +822,11 @@ namespace LedMatrixEngineSharp
                                 if (lastP2r2 != P2_r2)
                                 {
                                     proxy.P2r2.Write(P2_r2);
-                                    lastr2 = _r2;
+                                    lastP2r2 = P2_r2;
                                 }
-                                if (lastg2 != _g2)
+                                if (lastP2g2 != P2_g2)
                                 {
-                                    proxy.g2.Write(_g2);
+                                    proxy.P2g2.Write(P2_g2);
                                     lastP2g2 = P2_g2;
                                 }
                                 if (lastP2b2 != P2_b2) //This was commented
