@@ -29,6 +29,8 @@ GPIO 19		-->  [2]R2 (LED 2: Red)<br/>
 GPIO 20		-->  [2]B2 (LED 2: Blue)<br/>
 GPIO 13		-->  [2]G2 (LED 2: Green)<br/>
 
+#What it looks like
+![Display](https://github.com/PlatinumFusion/WindowsIOTLEDMatrix/raw/Master/img/IMG_1466.JPG)
 
 The library is still not very fast and does some flickering. Any help will be apreciated.
 This library was based on the work of https://github.com/mattdh666/rpi-led-matrix-panel
