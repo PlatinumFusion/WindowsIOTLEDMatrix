@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedMatrixEngineSharp", "Led
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAppHeadless", "DemoAppHeadless\DemoAppHeadless.csproj", "{81724744-3695-4A85-992C-8DA0ECBA19C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{E481D5FF-C001-49E1-95DC-43111A767E53}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Pictures\IMG_1466.JPG = ..\..\..\..\Pictures\IMG_1466.JPG
+		..\..\..\..\Pictures\IMG_1470.JPG = ..\..\..\..\Pictures\IMG_1470.JPG
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
